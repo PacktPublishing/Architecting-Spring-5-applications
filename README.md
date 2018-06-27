@@ -20,7 +20,11 @@ By the end of this course, you’ll be able to acknowledge Spring 5 and its arch
 ## Instructions and Navigation
 ### Assumed Knowledge
 To fully benefit from the coverage included in this course, you will need:<br/>
-This course is for experienced Spring developers who wish to architect enterprise grade applications. It also caters to software architects who would like to leverage Spring in their projects to create effective applications.
+● Prior working knowledge of the Java Programming language
+● Basic understanding of OOP concepts
+● Familiarity with Eclipse IDE
+● An understanding of JDBC & XML Schema
+● Experience with relational databases
 ### Technical Requirements
 This course has the following software requirements:<br/>
 Minimum Hardware Requirements
