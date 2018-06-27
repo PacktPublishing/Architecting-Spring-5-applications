@@ -20,10 +20,10 @@ By the end of this course, you’ll be able to acknowledge Spring 5 and its arch
 ## Instructions and Navigation
 ### Assumed Knowledge
 To fully benefit from the coverage included in this course, you will need:<br/>
-● Prior working knowledge of the Java Programming language
-● Basic understanding of OOP concepts
-● Familiarity with Eclipse IDE
-● An understanding of JDBC & XML Schema
+● Prior working knowledge of the Java Programming language<br/>
+● Basic understanding of OOP concepts<br/>
+● Familiarity with Eclipse IDE<br/>
+● An understanding of JDBC & XML Schema<br/>
 ● Experience with relational databases
 ### Technical Requirements
 This course has the following software requirements:<br/>
