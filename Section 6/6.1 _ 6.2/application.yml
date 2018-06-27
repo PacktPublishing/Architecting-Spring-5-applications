@@ -1,0 +1,23 @@
+server:
+  port: 8082
+  undertow: 
+    ioThreads: 15
+    workerThreads: 150
+    accesslog: 
+      enabled: true
+  compression: 
+    enabled: true
+    mimeTypes: text/xml, text/css, text/html, application/json
+    minResponseSize: 4096
+
+spring: 
+  application: 
+    name: abc-example-rest-jpa
+
+security: 
+  basic: 
+    enabled: true
+    realm: abc-example
+  user: 
+    name: abc
+    password: example

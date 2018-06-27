@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      discovery:
+        enabled: true
+
+encrypt:
+  failOnError: false
+  keyStore:
+    location: classpath:keystore.jks
+    password: ${KEYSTORE_PASSWORD:foobar}
+    alias: test

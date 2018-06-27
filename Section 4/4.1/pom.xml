@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.2.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>config-server</artifactId>
+	<groupId>com.asimio.cloud</groupId>
+	<version>0-SNAPSHOT</version>
+	<packaging>${packaging.type}</packaging>
+	<name>ConfigServer</name>
+	<description>Config Server</description>
+
+	<scm>
+		<connection>${repo.bitbucket.url}</connection>
+		<developerConnection>${repo.bitbucket.url}</developerConnection>
+		<url>${project.bitbucket.url}</url>
+	</scm>
+
+	<organization>
+		<name>Asimio Tech LLC</name>
+		<url>http://tech.asimio.net/</url>
+	</organization>
+	<inceptionYear>2016</inceptionYear>
+	<issueManagement>
+		<system>Bitbucket.org</system>
+		<url>${project.bitbucket.url}/configserver/issues</url>
+	</issueManagement>
+
+	<developers>
+		<developer>
+			<id>ootero</id>
+			<name>Orlando L Otero</name>
+			<organization>Asimio Tech LLC</organization>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<start-class>com.asimio.cloud.config.ConfigServerApplication</start-class>
+		<packaging.type>jar</packaging.type>
+		<docker.image.prefix>asimio</docker.image.prefix>
+		<push.image>false</push.image>
+
+		<project.bitbucket.url>https://bitbucket.org/asimio</project.bitbucket.url>
+		<repo.bitbucket.url>${project.bitbucket.url}/configserver.git</repo.bitbucket.url>
+
+		<!-- Plugins -->
+		<maven-clean-plugin.version>2.5</maven-clean-plugin.version>
+		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<docker-maven-plugin-spotify.version>0.4.13</docker-maven-plugin-spotify.version>
+
+		<!-- Dependencies -->
+		<spring-cloud.version>Camden.SR3</spring-cloud.version>
+
+		<!-- Test Dependencies -->
+		<rest-assured.version>2.9.0</rest-assured.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
+		</dependency>
+	    <dependency>
+	        <groupId>org.springframework.cloud</groupId>
+	        <artifactId>spring-cloud-starter-eureka</artifactId>
+	    </dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-monitor</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${rest-assured.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>config-server-war</id>
+			<properties>
+				<packaging.type>war</packaging.type>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<finalName>${project.artifactId}</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<compilerArguments>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+			<plugin>
+	            <groupId>com.spotify</groupId>
+	            <artifactId>docker-maven-plugin</artifactId>
+	            <version>${docker-maven-plugin-spotify.version}</version>
+				<!-- Include:
+					export DOCKER_HOST=tcp://docker:4243
+					in host executing mvn docker:build
+				-->
+	            <configuration>
+					<!-- One or the other -->
+					<!-- First add server entry in settings.xml -->
+<!-- 					<serverId>docker-hub</serverId> -->
+					<!-- Uses ~/.docker/config.json created once logged in using "docker login" command -->
+					<useConfigFile>true</useConfigFile>
+
+				    <imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
+				    <pushImage>${push.image}</pushImage>
+				    <forceTags>true</forceTags>
+					<imageTags>
+			           <imageTag>${project.version}</imageTag>
+			           <imageTag>latest</imageTag>
+			        </imageTags>
+	                <dockerDirectory>src/main/docker</dockerDirectory>
+	                <resources>
+	                    <resource>
+	                        <targetPath>/</targetPath>
+	                        <directory>${project.build.directory}</directory>
+	                        <include>${project.build.finalName}.jar</include>
+	                    </resource>
+	                </resources>
+	            </configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
