@@ -26,8 +26,8 @@ To fully benefit from the coverage included in this course, you will need:<br/>
 ● An understanding of JDBC & XML Schema<br/>
 ● Experience with relational databases
 ### Technical Requirements
-This course has the following software requirements:<br/>
-Minimum Hardware Requirements
+This course has the following requirements:<br/>
+Minimum Hardware Requirements:
 For successful completion of this course, students may require the computer systems with at least the following:
 
 OS: Mac OS X 10.8 or Windows 7
@@ -39,7 +39,7 @@ Memory: 4GB
 Storage: 128GB
 
 
-Recommended Hardware Requirements
+Recommended Hardware Requirements:
 For an optimal experience with hands-on labs and other practical activities, we recommend the following configuration:
 
 OS: Mac OS X 10.11 or Windows 10
@@ -50,7 +50,7 @@ Memory: 8GB
 
 Storage: 128G
 
-Software Requirements
+Software Requirements:
 
 OS: Mac OS X or Windows
 
